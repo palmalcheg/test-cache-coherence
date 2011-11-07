@@ -1,0 +1,19 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           targetNamespace="urn:fabric3.org"
+           name="TestComposite">
+
+    <component name="TestCacheExistence">
+        <f3:junit class="org.fabric3.cache.coherence.composite.TestCacheExistence"/>
+    </component>
+
+    <f3:caches>
+        <f3:cache name="dataIndexCache">
+            <f3:coherence/>
+        </f3:cache>
+        <f3:cache name="dataIndexCache2">
+            <f3:coherence/>
+        </f3:cache>
+    </f3:caches>
+
+</composite>
