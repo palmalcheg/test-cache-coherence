@@ -1,5 +1,6 @@
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:f3="urn:fabric3.org"
+           xmlns:coh="http://xmlns.oracle.com/coherence/coherence-cache-config"
            targetNamespace="urn:fabric3.org"
            name="TestComposite">
 
@@ -9,10 +10,48 @@
 
     <f3:caches>
         <f3:cache name="dataIndexCache">
-            <f3:coherence/>
+            <f3:coherence>
+              
+              <coh:cache-mapping>
+                <coh:cache-name>ram-cache1</coh:cache-name>
+                <coh:scheme-name>default-ram</coh:scheme-name>
+              </coh:cache-mapping>
+              
+              <coh:distributed-scheme>
+				 <coh:scheme-name>default-ram</coh:scheme-name>
+				 <coh:backing-map-scheme>
+				   <coh:local-scheme />
+				 </coh:backing-map-scheme>
+			  </coh:distributed-scheme>
+              
+            </f3:coherence>
         </f3:cache>
+        
         <f3:cache name="dataIndexCache2">
-            <f3:coherence/>
+            <f3:coherence>
+              
+              <coh:cache-mapping>
+                <coh:cache-name>near-cache2</coh:cache-name>
+                <coh:scheme-name>near-default</coh:scheme-name>
+              </coh:cache-mapping>
+              
+              <coh:near-scheme>
+                <coh:scheme-name>near-default</coh:scheme-name>
+                <coh:front-scheme>
+				  <coh:local-scheme>
+				    <coh:eviction-policy>HYBRID</coh:eviction-policy>
+				    <coh:high-units>1000</coh:high-units>
+				  </coh:local-scheme>
+				</coh:front-scheme>
+				<coh:back-scheme>
+				<!-- Scheme already declared -->
+				  <coh:distributed-scheme>
+				    <coh:scheme-ref>default-ram</coh:scheme-ref>
+			      </coh:distributed-scheme>
+				</coh:back-scheme>
+              </coh:near-scheme>
+            
+            </f3:coherence>
         </f3:cache>
     </f3:caches>
 
