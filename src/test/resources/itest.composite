@@ -19,10 +19,16 @@
               
               <coh:distributed-scheme>
 				 <coh:scheme-name>default-ram</coh:scheme-name>
-				 <coh:backing-map-scheme>
-				   <coh:local-scheme />
-				 </coh:backing-map-scheme>
+				<coh:backing-map-scheme> 
+					 <coh:ramjournal-scheme>
+					   <coh:scheme-ref>external-ram</coh:scheme-ref>
+					 </coh:ramjournal-scheme>
+				 </coh:backing-map-scheme> 
 			  </coh:distributed-scheme>
+			  
+			  <coh:ramjournal-scheme>
+				 <coh:scheme-name>external-ram</coh:scheme-name>				 
+			  </coh:ramjournal-scheme>
               
             </f3:coherence>
         </f3:cache>
